@@ -1,0 +1,25 @@
+@media (min-width: 300px) {
+    #width-setup {
+      width: 85%;
+    }
+    .custom-textfield {
+        width: 85%;
+    }
+  }
+@media (min-width: 576px) {
+    #width-setup {
+      width: 60%;
+    }
+    .custom-textfield {
+        width: 60%;
+    }
+  }
+  
+  @media (min-width: 800px) {
+    #width-setup {
+      width: 500px;
+    }
+    .custom-textfield {
+        width: 500px;
+    }
+  }
