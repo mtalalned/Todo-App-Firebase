@@ -11,7 +11,6 @@ const Login = () => {
   const [email , setEmail] = useState('')
   const [password , setPassword] = useState('')
   const [emailError , setEmailError] = useState(false)
-  const [passwordError , setPasswordError] = useState(false)
   const navigate = useNavigate()
   const [invalidEmailModal , setinvalidEmailModal] = useState (false)
 
@@ -21,14 +20,10 @@ const Login = () => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@(gmail|hotmail|yahoo)\.com$/;
 
     setEmailError (false)
-    setPasswordError (false)
     setinvalidEmailModal(false)
 
-    if (!emailRegex.test(email) && password.length < 8) {
-        setEmailError (true)
-        setPasswordError (true)
-    } else if (!emailRegex.test(email) || password.length < 8){
-      !emailRegex.test(email) ? setEmailError (true) : setPasswordError (true)
+    if (!emailRegex.test(email)){
+      setEmailError (true)
     } else {
       signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -48,7 +43,7 @@ const Login = () => {
       <TextField sx={{"& .MuiFormHelperText-root": {
       color: "red",}}} helperText={emailError ? 'Enter correct email' : null} onChange={(e)=>setEmail(e.target.value)} value={email} id="standard-basic-1" label="Enter Your Email" variant="standard" type='text' className='custom-textfield'/>
       <TextField sx={{"& .MuiFormHelperText-root": {
-      color: "red",}}} helperText={passwordError ? 'Password should be at least 8 characters' : null} onChange={(e)=>setPassword(e.target.value)} value={password} id="standard-basic-2" label="Enter Your Password" variant="standard" type='password' className='custom-textfield'/>
+      color: "red",}}} onChange={(e)=>setPassword(e.target.value)} value={password} id="standard-basic-2" label="Enter Your Password" variant="standard" type='password' className='custom-textfield'/>
       <Box className='d-flex gap-2 align-items-center'>
       <Button variant="contained"onClick={loginEmail}>LOGIN</Button>
       <Typography variant='p'>OR</Typography>

@@ -7,16 +7,27 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
+import { signOut } from "firebase/auth";
+import { auth } from '../Config/firebaseconfig';
+import { useState } from 'react';
 
-const drawerWidth = 240;
-const navItems = ['login', 'sign up', 'todoapp'];
+const navItems = ['login', 'sign up', 'todoapp' , 'signout'];
 
 function DrawerAppBar() {
 
   const navigate = useNavigate()
 
   const NavButtonClick = (item) => {
-    item === 'login' ? navigate('/') : navigate (item)
+    item === 'login' ? navigate('/') : item === 'signout' ? (
+      signOut(auth).then(() => {
+        // Sign-out successful.
+        if(auth.currentUser)
+        console.log ('signout successful')
+      }).catch((error) => {
+        // An error happened.
+        console.log ('signout unsuccessful')
+      })
+    ): navigate (item)
   }
 
   return (

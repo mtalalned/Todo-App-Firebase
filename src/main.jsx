@@ -6,6 +6,7 @@ import Layout from './Layout';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import TodoApp from './pages/TodoApp';
+import ProtectedRoutes from './components/ProtectedRoutes';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'todoapp',
-        element: <TodoApp />,
+        element: <ProtectedRoutes component={<TodoApp />}/>,
       },
     ]
   }
