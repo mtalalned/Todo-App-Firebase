@@ -6,6 +6,18 @@
         width: 85%;
     }
   }
+
+  @media (min-width: 430px) {
+    .list-p {
+      width: 55% !important;
+    }
+  }
+
+  @media (min-width: 500px) {
+    .list-p {
+      width: 275px !important;
+    }
+  }
 @media (min-width: 576px) {
     #width-setup {
       width: 60%;
@@ -15,6 +27,16 @@
     }
   }
   
+  @media (min-width: 600px) {
+    .custom-textfield-input {
+      width: 40% !important;
+      min-width: 400px !important;
+    }
+    .list-p {
+      width: 365px !important;
+    }
+  }
+
   @media (min-width: 800px) {
     #width-setup {
       width: 500px;
@@ -22,4 +44,30 @@
     .custom-textfield {
         width: 500px;
     }
+  }
+
+  .custom-button-delete {
+    min-width: fit-content !important;
+    font-size: 5px;
+  }
+
+  .custom-button-edit {
+    min-width: fit-content !important;
+  }
+
+  .custom-textfield-input {
+    width: 300px !important;
+  }
+
+  .custom-button-input {
+    min-width: fit-content !important;
+  }
+
+  .input-field-box {
+    flex-wrap: wrap !important;
+  }
+
+  .list-p {
+    width: 145px;
+    overflow-wrap: break-word;
   }
