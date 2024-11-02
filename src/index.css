@@ -67,6 +67,10 @@
     flex-wrap: wrap !important;
   }
 
+  .input-field-box-2 {
+    width: fit-content !important;
+    box-shadow: 3px 3px 8px 1px rgb(192, 194, 194);
+  }
   .list-p {
     width: 145px;
     overflow-wrap: break-word;
