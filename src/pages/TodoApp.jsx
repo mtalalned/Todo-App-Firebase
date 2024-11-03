@@ -29,7 +29,7 @@ const TodoApp = () => {
         });
       }
       catch {
-        console.log ('unable to get data from firestor')
+        console.log ('unable to get data from firestore')
       }
       finally {
         setLoader(false)
