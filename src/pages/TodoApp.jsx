@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import {Box , Button , TextField, Typography} from '@mui/material'
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc} from "firebase/firestore";
 import { db , auth } from '../Config/firebaseconfig';
-import {  doc, updateDoc, deleteDoc, query, where, getDocs } from "firebase/firestore";
+import {  doc, updateDoc, deleteDoc, query, where, getDocs , orderBy , Timestamp} from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import {CircularProgress} from '@mui/material';
 
@@ -17,19 +17,18 @@ const TodoApp = () => {
     const getDatafromFirestore = async () => {
       
       try {
-        const q = query(collection(db, "todo"), where("uid", "==", auth.currentUser.uid));
+        const q = query(collection(db, "todo"), where("uid", "==", auth.currentUser.uid) , orderBy('date','desc'));
         const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-          // doc.data() is never undefined for query doc snapshots
+        querySnapshot.forEach((doc) => { 
           inputArray.push ({
             ...doc.data(),
             docid: doc.id,
           })
           setInputArray([...inputArray])
-        });
+        }); 
       }
-      catch {
-        console.log ('unable to get data from firestore')
+      catch (error ){
+        console.log (error + 'unable to get data from firestore')
       }
       finally {
         setLoader(false)
@@ -50,6 +49,7 @@ const TodoApp = () => {
       const docRef = await addDoc(collection(db, "todo"), {
         input: inputValue,
         uid: auth.currentUser.uid,
+        date: Timestamp.now(),
       });
       console.log("Document written with ID: ", docRef.id);
       inputArray.push ({
@@ -101,7 +101,7 @@ const TodoApp = () => {
         <TextField value={inputValue} onChange={(e)=>{setInputValue(e.target.value)}} id="standard-basic" label="Enter Todo" variant="standard" className='custom-textfield-input'/>
         <Button onClick={addTodo} variant="contained" id='width-setup-1' className='custom-button-input fs-6 fw-bold' color='secondary'>Add Todo</Button>
       </Box>
-      <Box className='d-flex flex-column gap-3'>
+      <Box className='d-flex flex-column gap-3 pb-4'>
         {loader && <CircularProgress />}
         {inputArray.map((item , index)=>{
           return <Box key={index} className='input-field-box-2 rounded-3 ms-2 me-2 border-3 p-2 d-flex justify-content-center align-items-center gap-1'>
